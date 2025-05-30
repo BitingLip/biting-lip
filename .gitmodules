@@ -11,7 +11,7 @@
 	path = task-manager
 	url = https://github.com/BitingLip/task-manager.git
 [submodule "graphical-user-interface"]
-	path = user-interface
+	path = graphical-user-interface
 	url = https://github.com/BitingLip/graphical-user-interface.git
 [submodule "command-line-interface"]
 	path = command-line-interface
