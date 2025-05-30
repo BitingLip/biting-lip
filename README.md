@@ -4,12 +4,13 @@ A distributed system architecture with modular components managed as Git submodu
 
 ## Architecture
 
-This repository contains the main orchestration layer for the BitingLip system, which consists of four core components:
+This repository contains the main orchestration layer for the BitingLip system, which consists of five core components:
 
 - **cluster-manager**: Manages cluster orchestration and resource allocation
 - **gateway-manager**: Handles API gateway and routing functionality  
 - **model-manager**: Manages ML models and inference services
 - **task-manager**: Coordinates task scheduling and execution
+- **user-interface**: Provides the frontend web interface for system interaction
 
 ## Getting Started
 
@@ -68,3 +69,4 @@ git submodule status
 - [gateway-manager](https://github.com/BitingLip/gateway-manager)
 - [model-manager](https://github.com/BitingLip/model-manager)
 - [task-manager](https://github.com/BitingLip/task-manager)
+- [user-interface](https://github.com/BitingLip/user-interface)

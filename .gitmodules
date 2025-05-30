@@ -10,3 +10,6 @@
 [submodule "task-manager"]
 	path = task-manager
 	url = https://github.com/BitingLip/task-manager.git
+[submodule "user-interface"]
+	path = user-interface
+	url = https://github.com/BitingLip/user-interface.git
