@@ -1,0 +1,12 @@
+[submodule "cluster-manager"]
+	path = cluster-manager
+	url = https://github.com/BitingLip/cluster-manager.git
+[submodule "gateway-manager"]
+	path = gateway-manager
+	url = https://github.com/BitingLip/gateway-manager.git
+[submodule "model-manager"]
+	path = model-manager
+	url = https://github.com/BitingLip/model-manager.git
+[submodule "task-manager"]
+	path = task-manager
+	url = https://github.com/BitingLip/task-manager.git
