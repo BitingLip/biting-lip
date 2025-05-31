@@ -8,7 +8,11 @@ import httpx
 from typing import Dict, Optional, List, Tuple
 import asyncio
 import logging
-from .central_config import get_config
+
+try:
+    from .central_config import get_config
+except ImportError:
+    from central_config import get_config
 
 logger = logging.getLogger(__name__)
 
