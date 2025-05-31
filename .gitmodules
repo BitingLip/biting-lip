@@ -16,3 +16,6 @@
 [submodule "interfaces/command-line-interface"]
 	path = interfaces/command-line-interface
 	url = https://github.com/BitingLip/command-line-interface.git
+[submodule "interfaces/model-context-protocol"]
+	path = interfaces/model-context-protocol
+	url = https://github.com/BitingLip/model-context-protocol.git
