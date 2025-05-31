@@ -13,21 +13,21 @@ cd biting-lip
 cd cluster-manager && docker-compose up -d redis && cd ..
 
 # Start core services
-cd model-manager && python app/main.py &      # Port 8002
-cd task-manager && python app/main.py &      # Port 8004  
-cd cluster-manager/cluster/worker && python app/worker.py &
-cd gateway-manager && python app/main.py     # Port 8001
+cd managers/model-manager && python app/main.py &      # Port 8002
+cd managers/task-manager && python app/main.py &      # Port 8004  
+cd managers/cluster-manager/cluster/worker && python app/worker.py &
+cd managers/gateway-manager && python app/main.py     # Port 8001
 ```
 
 ## 📋 Project Overview
 
 | Module | Status | Purpose | Documentation |
 |--------|--------|---------|---------------|
-| 🖥️ **[cluster-manager](cluster-manager/)** | ⚙️ **Operational** | GPU cluster & worker management | [📖 Docs](cluster-manager/docs/) |
-| 🌐 **[gateway-manager](gateway-manager/)** | 🛠️ **In Progress** | API gateway & request routing | [📖 Docs](gateway-manager/docs/) |
-| 📦 **[model-manager](model-manager/)** | ⚙️ **Operational** | Model storage & management | [📖 Docs](model-manager/docs/) |
-| 📋 **[task-manager](task-manager/)** | 🚧 **In Development** | Task scheduling & lifecycle | [📖 Docs](task-manager/docs/) |
-| 💻 **[command-line-interface](command-line-interface/)** | 🚧 **Planned** | CLI tools & utilities | [📖 Docs](command-line-interface/docs/) |
+| 🖥️ **[cluster-manager](managers/cluster-manager/)** | ⚙️ **Operational** | GPU cluster & worker management | [📖 Docs](managers/cluster-manager/docs/) |
+| 🌐 **[gateway-manager](managers/gateway-manager/)** | 🛠️ **In Progress** | API gateway & request routing | [📖 Docs](managers/gateway-manager/docs/) |
+| 📦 **[model-manager](managers/model-manager/)** | ⚙️ **Operational** | Model storage & management | [📖 Docs](managers/model-manager/docs/) |
+| 📋 **[task-manager](managers/task-manager/)** | 🚧 **In Development** | Task scheduling & lifecycle | [📖 Docs](managers/task-manager/docs/) |
+| 💻 **[command-line-interface](interfaces/command-line-interface/)** | 🚧 **Planned** | CLI tools & utilities | [📖 Docs](interfaces/command-line-interface/docs/) |
 | 🎨 **[graphical-user-interface](graphical-user-interface/)** | 🚧 **Planned** | Web interface | [📖 Docs](graphical-user-interface/docs/) |
 
 **Status Legend:**

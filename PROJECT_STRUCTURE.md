@@ -34,20 +34,21 @@ BitingLip/
 │
 ├── .infra/                                # Infrastructure configuration (Empty - Planned)
 │
-├── cluster-manager/                       # GPU Cluster Management Module ⚙️ OPERATIONAL
-│   ├── LICENSE                           # Module license
-│   ├── README.md                         # Cluster manager documentation
-│   ├── .gitignore                        # Updated with **/.env pattern
-│   ├── docker-compose.yml               # Redis, Flower services
-│   │
-│   └── cluster/
-│       └── worker/                       # Celery Worker Implementation
-│           ├── .env                      # Environment variables (MODEL_CACHE_DIR updated)
-│           ├── .env.example             # Environment template
-│           ├── requirements.txt          # Python dependencies
-│           ├── start_worker.bat         # Worker startup script
-│           │
-│           └── app/                     # Worker application code
+├── managers/                              # 🏗️ SERVICE MANAGERS
+│   ├── cluster-manager/                   # GPU Cluster Management Module ⚙️ OPERATIONAL
+│   │   ├── LICENSE                       # Module license
+│   │   ├── README.md                     # Cluster manager documentation
+│   │   ├── .gitignore                    # Updated with **/.env pattern
+│   │   ├── docker-compose.yml           # Redis, Flower services
+│   │   │
+│   │   └── cluster/
+│   │       └── worker/                   # Celery Worker Implementation
+│   │           ├── .env                  # Environment variables (MODEL_CACHE_DIR updated)
+│   │           ├── .env.example         # Environment template
+│   │           ├── requirements.txt      # Python dependencies
+│   │           ├── start_worker.bat     # Worker startup script
+│   │           │
+│   │           └── app/                 # Worker application code
 │               ├── __init__.py          # Package initialization
 │               ├── config.py            # Worker configuration (centralized models)
 │               ├── model_loader.py      # Model loading and management

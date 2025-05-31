@@ -16,10 +16,10 @@ git clone --recurse-submodules https://github.com/BitingLip/biting-lip.git
 cd biting-lip
 
 # Start Redis (required for cluster operations)
-docker-compose -f cluster-manager/docker-compose.yml up -d redis
+docker-compose -f managers/cluster-manager/docker-compose.yml up -d redis
 
 # Install dependencies for each module
-cd cluster-manager/cluster/worker && pip install -r requirements.txt
+cd managers/cluster-manager/cluster/worker && pip install -r requirements.txt
 cd ../../../gateway-manager && pip install -r requirements.txt
 cd ../model-manager && pip install -r requirements.txt
 cd ../task-manager && pip install -r requirements.txt
@@ -48,7 +48,7 @@ cd ../task-manager && pip install -r requirements.txt
 
 4. **Start Cluster Workers** (GPU processing):
    ```bash
-   cd cluster-manager/cluster/worker && python app/worker.py
+   cd managers/cluster-manager/cluster/worker && python app/worker.py
    ```
 
 5. **Start Gateway Manager** (API entry point):

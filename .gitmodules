@@ -1,18 +1,18 @@
-[submodule "cluster-manager"]
-	path = cluster-manager
+[submodule "managers/cluster-manager"]
+	path = managers/cluster-manager
 	url = https://github.com/BitingLip/cluster-manager.git
-[submodule "gateway-manager"]
-	path = gateway-manager
+[submodule "managers/gateway-manager"]
+	path = managers/gateway-manager
 	url = https://github.com/BitingLip/gateway-manager.git
-[submodule "model-manager"]
-	path = model-manager
+[submodule "managers/model-manager"]
+	path = managers/model-manager
 	url = https://github.com/BitingLip/model-manager.git
-[submodule "task-manager"]
-	path = task-manager
+[submodule "managers/task-manager"]
+	path = managers/task-manager
 	url = https://github.com/BitingLip/task-manager.git
-[submodule "graphical-user-interface"]
-	path = graphical-user-interface
+[submodule "interfaces/graphical-user-interface"]
+	path = interfaces/graphical-user-interface
 	url = https://github.com/BitingLip/graphical-user-interface.git
-[submodule "command-line-interface"]
-	path = command-line-interface
+[submodule "interfaces/command-line-interface"]
+	path = interfaces/command-line-interface
 	url = https://github.com/BitingLip/command-line-interface.git

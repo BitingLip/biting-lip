@@ -14,7 +14,7 @@ def test_task_manager():
     try:
         script = """
 import sys
-sys.path.insert(0, r"task-manager/app")
+sys.path.insert(0, r"managers/task-manager/app")
 from core.config import get_settings
 settings = get_settings()
 print("SUCCESS: Task Manager config loaded")
@@ -45,7 +45,7 @@ def test_gateway_manager():
     try:
         script = """
 import sys
-sys.path.insert(0, r"gateway-manager/app")
+sys.path.insert(0, r"managers/gateway-manager/app")
 from config import settings
 print("SUCCESS: Gateway Manager config loaded")
 print("Port:", getattr(settings, 'api_port', getattr(settings, 'port', 'N/A')))
@@ -76,7 +76,7 @@ def test_cli():
     try:
         script = """
 import sys
-sys.path.insert(0, r"command-line-interface")
+sys.path.insert(0, r"interfaces/command-line-interface")
 from config import settings
 print("SUCCESS: CLI config loaded")
 print("API URL:", getattr(settings, 'api_url', 'N/A'))
@@ -106,7 +106,7 @@ def test_model_manager():
     try:
         script = """
 import sys
-sys.path.insert(0, r"model-manager/app")
+sys.path.insert(0, r"managers/model-manager/app")
 from config import settings
 print("SUCCESS: Model Manager config loaded")
 print("Port:", settings.port)
@@ -137,7 +137,7 @@ def test_cluster_manager():
     try:
         script = """
 import sys
-sys.path.insert(0, r"cluster-manager/app")
+sys.path.insert(0, r"managers/cluster-manager/app")
 from config import settings
 print("SUCCESS: Cluster Manager config loaded")
 print("Port:", settings.port)
