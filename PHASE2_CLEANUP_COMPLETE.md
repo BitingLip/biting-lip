@@ -76,7 +76,7 @@
 ## BACKUP OPERATIONS
 
 ### Configuration Backup Created
-**Safely backed up all active configurations to `backup_configs/`:**
+**Safely backed up all active configurations to `config/backup_configs/`:**
 - Master .env configuration
 - All service-specific .env files
 - Environment and service-specific configuration files
