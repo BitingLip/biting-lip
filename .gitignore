@@ -129,6 +129,7 @@ celerybeat.pid
 
 # Environments
 .env
+**/.env
 .venv
 env/
 venv/
@@ -172,3 +173,59 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+/old-structure
+#   This is a legacy directory structure that was used in the past.
+
+# Old project structure (migration source)
+old-structure/
+
+# AI Models and Cache Files
+models/
+*.bin
+*.safetensors
+*.ckpt
+*.pth
+*.pt
+*.onnx
+*.pb
+*.tflite
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+
+# HuggingFace Cache
+.cache/
+transformers_cache/
+huggingface_hub/
+
+# Model downloads and artifacts
+downloads/
+artifacts/
+checkpoints/
+pretrained/
+
+# Large data files
+*.tar.gz
+*.zip
+*.7z
+*.rar
+data/
+datasets/
+
+# VS Code settings
+.vscode/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Log files
+*.log
+logs/
+debug_*.txt
+
+tests/

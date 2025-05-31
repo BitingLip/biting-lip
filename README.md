@@ -1,67 +1,76 @@
 # BitingLip
 
-A distributed system architecture with modular components managed as Git submodules.
+A distributed AI inference platform with modular microservices architecture. BitingLip provides scalable, GPU-accelerated AI model serving with support for multiple model types including text generation, image generation, and more.
 
-## Architecture
-
-This repository contains the main orchestration layer for the BitingLip system, which consists of five core components:
-
-- **cluster-manager**: Manages cluster orchestration and resource allocation
-- **gateway-manager**: Handles API gateway and routing functionality  
-- **model-manager**: Manages ML models and inference services
-- **task-manager**: Coordinates task scheduling and execution
-- **user-interface**: Provides the frontend web interface for system interaction
-
-## Getting Started
-
-### Initial Setup
-
-When cloning this repository for the first time, you need to initialize and update the submodules:
+## 🚀 Quick Start
 
 ```bash
-git clone https://github.com/BitingLip/biting-lip.git
-cd biting-lip
-git submodule init
-git submodule update
-```
-
-Or clone with submodules in one command:
-
-```bash
+# Clone with submodules
 git clone --recurse-submodules https://github.com/BitingLip/biting-lip.git
+cd biting-lip
+
+# Start Redis (required)
+cd cluster-manager && docker-compose up -d redis && cd ..
+
+# Start core services
+cd model-manager && python app/main.py &      # Port 8002
+cd task-manager && python app/main.py &      # Port 8004  
+cd cluster-manager/cluster/worker && python app/worker.py &
+cd gateway-manager && python app/main.py     # Port 8001
 ```
 
-### Working with Submodules
+## 📋 Project Overview
 
-#### Updating all submodules to latest:
-```bash
-git submodule update --remote
-```
+| Module | Status | Purpose | Documentation |
+|--------|--------|---------|---------------|
+| 🖥️ **[cluster-manager](cluster-manager/)** | ⚙️ **Operational** | GPU cluster & worker management | [📖 Docs](cluster-manager/docs/) |
+| 🌐 **[gateway-manager](gateway-manager/)** | 🛠️ **In Progress** | API gateway & request routing | [📖 Docs](gateway-manager/docs/) |
+| 📦 **[model-manager](model-manager/)** | ⚙️ **Operational** | Model storage & management | [📖 Docs](model-manager/docs/) |
+| 📋 **[task-manager](task-manager/)** | 🚧 **In Development** | Task scheduling & lifecycle | [📖 Docs](task-manager/docs/) |
+| 💻 **[command-line-interface](command-line-interface/)** | 🚧 **Planned** | CLI tools & utilities | [📖 Docs](command-line-interface/docs/) |
+| 🎨 **[graphical-user-interface](graphical-user-interface/)** | 🚧 **Planned** | Web interface | [📖 Docs](graphical-user-interface/docs/) |
 
-#### Updating a specific submodule:
-```bash
-cd cluster-manager
-git pull origin main
-cd ..
-git add cluster-manager
-git commit -m "Update cluster-manager submodule"
-```
+**Status Legend:**
+- ⚙️ **Operational**: Fully functional and tested
+- 🛠️ **In Progress**: Core functionality working, some features pending  
+- 🚧 **In Development**: Basic structure in place, actively being developed
+- � **Planned**: Structure defined, implementation pending
 
-#### Checking submodule status:
-```bash
-git submodule status
-```
+## ✨ Features
 
-### Development Workflow
+- 🚀 **Distributed GPU Computing**: Scalable worker nodes with GPU acceleration
+- 🤖 **Multi-Model Support**: Text generation, image generation, embeddings, and more
+- 🔄 **Task Queue Management**: Robust task scheduling with Celery and Redis
+- 📊 **Centralized Model Storage**: Unified model management across all workers
+- 🌐 **RESTful API**: Clean HTTP API for all operations
+- 📈 **Monitoring & Metrics**: Real-time system and task monitoring
 
-1. Make changes in individual submodule repositories
-2. Commit and push changes to the submodule's repository
-3. Update the main repository to reference the new commit:
-   ```bash
-   git add <submodule-name>
-   git commit -m "Update <submodule-name> to latest version"
-   git push
-   ```
+## 📚 Documentation
+
+- **[🏗️ Architecture Overview](docs/architecture.md)** - System design and component interaction
+- **[🛠️ Development Guide](docs/development.md)** - Setup, workflow, and contribution guidelines  
+- **[🚀 Deployment Guide](docs/deployment.md)** - Production deployment and scaling
+- **[📋 Project Structure](PROJECT_STRUCTURE.md)** - Complete directory tree and file descriptions
+
+## 🔧 Development
+
+1.  Navigate to the specific submodule directory you want to work on (e.g., `cd cluster-manager`).
+2.  Make your changes, commit them, and push them to the submodule's own remote repository (e.g., `git push origin main`).
+3.  Navigate back to the parent `biting-lip` repository (e.g., `cd ..`).
+4.  The parent repository will now see that the submodule has new changes. Stage this change:
+    ```bash
+    git add <submodule-name> 
+    # Example: git add cluster-manager
+    ```
+5.  Commit the update to the parent repository, which records the new commit hash for the submodule:
+    ```bash
+    git commit -m "Update <submodule-name> to latest version"
+    # Example: git commit -m "Update cluster-manager to latest version"
+    ```
+6.  Push the changes in the parent repository:
+    ```bash
+    git push
+    ```
 
 ## Submodule Repositories
 
