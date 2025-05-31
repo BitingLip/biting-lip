@@ -20,6 +20,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+class ConfigurationError(Exception):
+    """Raised when configuration loading or validation fails"""
+    pass
+
+
 class BitingLipConfig(BaseSettings):
     """
     Centralized configuration for the entire BitingLip platform.
@@ -96,7 +101,8 @@ class BitingLipConfig(BaseSettings):
     enable_prometheus: bool = Field(default=True, description="Enable Prometheus metrics")
     prometheus_port: int = Field(default=9090, description="Prometheus metrics port")
     health_check_interval: int = Field(default=30, description="Health check interval in seconds")
-      # =============================================================================
+    
+    # =============================================================================
     # Task Manager Configuration
     # =============================================================================
     task_retry_limit: int = Field(default=3, description="Task retry limit")
@@ -238,8 +244,7 @@ class ConfigurationManager:
         # 3. Master .env file
         master_env = self.project_root / ".env"
         if master_env.exists():
-            env_files.append(str(master_env))
-          # Load configuration with file hierarchy
+            env_files.append(str(master_env))        # Load configuration with file hierarchy
         try:
             self._config = BitingLipConfig(_env_file=env_files or None)
             logger.info("Configuration loaded successfully")

@@ -36,6 +36,34 @@ class TaskManagerSettings:
     @property
     def cors_origins(self):
         return self.config.cors_origins
+    
+    @property
+    def log_format(self):
+        return getattr(self.config, 'log_format', 'standard')
+    
+    @property
+    def log_level(self):
+        return getattr(self.config, 'log_level', 'INFO')
+    
+    @property
+    def celery_broker_url(self):
+        return getattr(self.config, 'celery_broker_url', 'redis://localhost:6379/0')
+    
+    @property
+    def celery_result_backend(self):
+        return getattr(self.config, 'celery_result_backend', 'redis://localhost:6379/0')
+    
+    @property
+    def redis_url(self):
+        return getattr(self.config, 'redis_url', 'redis://localhost:6379/0')
+    
+    @property
+    def cluster_manager_url(self):
+        return f"http://{self.config.cluster_manager_host}:{self.config.cluster_manager_port}"
+    
+    @property
+    def model_manager_url(self):
+        return f"http://{self.config.model_manager_host}:{self.config.model_manager_port}"
 
 def get_settings():
     """Get task manager settings instance"""

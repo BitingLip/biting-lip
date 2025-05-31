@@ -1,7 +1,11 @@
 """
 BitingLip Platform Configuration Package
 
-This package provides centralized configuration management for all BitingLip services.
+Enhanced centralized configuration management with:
+- Type safety and validation
+- Performance optimizations  
+- Better error handling
+- Improved naming conventions
 """
 
 from .central_config import (
@@ -9,13 +13,40 @@ from .central_config import (
     ConfigurationManager,
     get_config,
     get_service_config,
-    reload_config
+    reload_config,
+    ConfigurationError
 )
 
+from .service_discovery import (
+    ServiceDiscovery,
+    get_service_url,
+    get_all_service_urls,
+    check_service_health,
+    check_all_services_health,
+    wait_for_service,
+    wait_for_all_services
+)
+
+# Version info
+__version__ = "2.0.0"
+__author__ = "BitingLip Platform Team"
+
+# Public API
 __all__ = [
+    # Core configuration
     'BitingLipConfig',
     'ConfigurationManager', 
     'get_config',
     'get_service_config',
-    'reload_config'
+    'reload_config',
+    'ConfigurationError',
+    
+    # Service discovery
+    'ServiceDiscovery',
+    'get_service_url',
+    'get_all_service_urls',
+    'check_service_health',
+    'check_all_services_health',
+    'wait_for_service',
+    'wait_for_all_services'
 ]

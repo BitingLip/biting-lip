@@ -8,9 +8,14 @@ import httpx
 from typing import Dict, Optional, List, Tuple
 import asyncio
 import logging
-from central_config import get_config
+from .central_config import get_config
 
 logger = logging.getLogger(__name__)
+
+
+class ServiceDiscoveryError(Exception):
+    """Raised when service discovery operations fail"""
+    pass
 
 
 class ServiceDiscovery:
@@ -89,7 +94,7 @@ class ServiceDiscovery:
             self._health_cache[service_name] = False
             return False, error_msg
         except httpx.ConnectError:
-            error_msg = f"Cannot connect to service"
+            error_msg = "Cannot connect to service"
             self._health_cache[service_name] = False
             return False, error_msg
         except Exception as e:
@@ -117,14 +122,10 @@ class ServiceDiscovery:
         
         results = await asyncio.gather(*tasks, return_exceptions=True)
         
-        health_results = {}
-        for service, result in zip(services, results):
-            if isinstance(result, Exception):
-                health_results[service] = (False, str(result))
-            else:
-                health_results[service] = result
-        
-        return health_results
+        return {
+            service: result if not isinstance(result, Exception) else (False, str(result))
+            for service, result in zip(services, results)
+        }
     
     def get_healthy_services(self) -> List[str]:
         """Get list of services that are currently healthy (from cache)"""
