@@ -8,13 +8,8 @@ It implements a hierarchical configuration system with environment-specific over
 import os
 from pathlib import Path
 from typing import Dict, Optional, Any, Union
-from pydantic import BaseModel, Field, validator
-try:
-    from pydantic_settings import BaseSettings, SettingsConfigDict
-except ImportError:
-    # Fallback for older pydantic versions
-    from pydantic import BaseSettings
-    SettingsConfigDict = None
+from pydantic import BaseModel, Field, field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
 import logging
 
 logger = logging.getLogger(__name__)
@@ -37,11 +32,12 @@ class BitingLipConfig(BaseSettings):
     5. Default values
     """
     
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore"
+    )
     
     # =============================================================================
     # Environment Configuration
@@ -62,13 +58,37 @@ class BitingLipConfig(BaseSettings):
     task_manager_host: str = Field(default="localhost", description="Task manager service host")
     model_manager_host: str = Field(default="localhost", description="Model manager service host")
     cluster_manager_host: str = Field(default="localhost", description="Cluster manager service host")
-    
-    # =============================================================================
+      # =============================================================================
     # Infrastructure Services
     # =============================================================================
     redis_host: str = Field(default="localhost", description="Redis host")
     redis_port: int = Field(default=6379, description="Redis port")
     redis_db: int = Field(default=0, description="Redis database number")
+    
+    # PostgreSQL Database Configuration
+    model_db_host: str = Field(default="localhost", description="Model Manager database host")
+    model_db_port: int = Field(default=5432, description="Model Manager database port")
+    model_db_name: str = Field(default="bitinglip_models", description="Model Manager database name")
+    model_db_user: str = Field(default="model_manager", description="Model Manager database user")
+    model_db_password: str = Field(default="model_manager_2025!", description="Model Manager database password")
+    
+    task_db_host: str = Field(default="localhost", description="Task Manager database host")
+    task_db_port: int = Field(default=5432, description="Task Manager database port")
+    task_db_name: str = Field(default="bitinglip_tasks", description="Task Manager database name")
+    task_db_user: str = Field(default="task_manager", description="Task Manager database user")
+    task_db_password: str = Field(default="task_manager_2025!", description="Task Manager database password")
+    
+    gateway_db_host: str = Field(default="localhost", description="Gateway Manager database host")
+    gateway_db_port: int = Field(default=5432, description="Gateway Manager database port")
+    gateway_db_name: str = Field(default="bitinglip_gateway", description="Gateway Manager database name")
+    gateway_db_user: str = Field(default="gateway_manager", description="Gateway Manager database user")
+    gateway_db_password: str = Field(default="gateway_manager_2025!", description="Gateway Manager database password")
+    
+    cluster_db_host: str = Field(default="localhost", description="Cluster Manager database host")
+    cluster_db_port: int = Field(default=5432, description="Cluster Manager database port")
+    cluster_db_name: str = Field(default="bitinglip_cluster", description="Cluster Manager database name")
+    cluster_db_user: str = Field(default="cluster_manager", description="Cluster Manager database user")
+    cluster_db_password: str = Field(default="cluster_manager_2025!", description="Cluster Manager database password")
     
     # =============================================================================
     # Celery Configuration (Shared)
@@ -168,25 +188,27 @@ class BitingLipConfig(BaseSettings):
     def cluster_manager_url(self) -> str:
         """Generate Cluster Manager service URL"""
         return f"http://{self.cluster_manager_host}:{self.cluster_manager_port}"
-    
-    # =============================================================================
+      # =============================================================================
     # Validators
     # =============================================================================
-    @validator('environment')
+    @field_validator('environment')
+    @classmethod
     def validate_environment(cls, v):
         allowed = ['development', 'staging', 'production']
         if v not in allowed:
             raise ValueError(f'Environment must be one of {allowed}')
         return v
     
-    @validator('log_level')
+    @field_validator('log_level')
+    @classmethod
     def validate_log_level(cls, v):
         allowed = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
         if v.upper() not in allowed:
             raise ValueError(f'Log level must be one of {allowed}')
         return v.upper()
     
-    @validator('gpu_memory_fraction')
+    @field_validator('gpu_memory_fraction')
+    @classmethod
     def validate_gpu_memory_fraction(cls, v):
         if not 0.1 <= v <= 1.0:
             raise ValueError('GPU memory fraction must be between 0.1 and 1.0')
@@ -245,8 +267,8 @@ class ConfigurationManager:
         master_env = self.project_root / ".env"
         if master_env.exists():
             env_files.append(str(master_env))        # Load configuration with file hierarchy
-        try:
-            self._config = BitingLipConfig(_env_file=env_files or None)
+        try:            # Create configuration instance - env files handled by model_config
+            self._config = BitingLipConfig()
             logger.info("Configuration loaded successfully")
             return self._config
         except Exception as e:
