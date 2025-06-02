@@ -17,6 +17,12 @@ from .central_config import (
     ConfigurationError
 )
 
+from .distributed_config import (
+    load_service_config,
+    load_infrastructure_config,
+    get_config_loader
+)
+
 from .service_discovery import (
     ServiceDiscovery,
     get_service_url,
@@ -26,6 +32,9 @@ from .service_discovery import (
     wait_for_service,
     wait_for_all_services
 )
+
+
+
 
 # Version info
 __version__ = "2.0.0"
@@ -40,6 +49,11 @@ __all__ = [
     'get_service_config',
     'reload_config',
     'ConfigurationError',
+
+    # Distributed configuration
+    'load_service_config',
+    'load_infrastructure_config',
+    'get_config_loader',
     
     # Service discovery
     'ServiceDiscovery',
