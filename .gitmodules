@@ -4,6 +4,9 @@
 [submodule "managers/gateway-manager"]
 	path = managers/gateway-manager
 	url = https://github.com/BitingLip/gateway-manager.git
+[submodule "managers/node-manager"]
+    path = managers/node-manager
+    url = https://github.com/BitingLip/node-manager.git
 [submodule "managers/model-manager"]
 	path = managers/model-manager
 	url = https://github.com/BitingLip/model-manager.git
